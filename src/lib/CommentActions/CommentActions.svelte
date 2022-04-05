@@ -4,7 +4,7 @@
   import IconDelete from "$icons/IconDelete.svelte";
   import CommentAction from "./CommentAction.svelte";
 
-  import { getContext } from "svelte";
+  import { createEventDispatcher, getContext } from "svelte";
   import { currentUser } from "$stores/userStore";
   import { commentsStore } from "$stores/comments";
 
@@ -13,32 +13,37 @@
 
   let comment: TypeComment = getContext("comment");
   let user: TypeUser = comment.user;
-  console.log(comment);
 
-  let removeComment = (): void => {
-    $commentsStore = $commentsStore.filter(
-      (storeComment: TypeComment) => storeComment.id !== comment.id
-    );
-  };
+  let dispatch = createEventDispatcher();
 </script>
 
 <div class="flex gap-x-4 items-center">
   {#if user.username === $currentUser.username}
     <CommentAction
-      class="text-softRed hover:text-paleRed"
-      on:click={removeComment}>
+      on:click={() => {
+        dispatch("delete");
+      }}
+      class="text-softRed hover:text-paleRed">
       <IconDelete />
 
       <span class="font-medium leading-6">Delete</span>
     </CommentAction>
 
-    <CommentAction class="text-moderateBlue hover:text-lightGrayishBlue">
+    <CommentAction
+      class="text-moderateBlue hover:text-lightGrayishBlue"
+      on:click={() => {
+        dispatch("edit");
+      }}>
       <IconEdit />
 
       <span class="font-medium leading-6">Edit</span>
     </CommentAction>
   {:else}
-    <CommentAction class="text-moderateBlue hover:text-lightGrayishBlue">
+    <CommentAction
+      class="text-moderateBlue hover:text-lightGrayishBlue"
+      on:click={() => {
+        dispatch("reply");
+      }}>
       <IconReply />
 
       <span class="font-medium leading-6">Reply</span>

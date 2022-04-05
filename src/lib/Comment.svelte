@@ -4,10 +4,16 @@
   import CommentText from "$lib/CommentText/CommentText.svelte";
   import CommentHeader from "$lib/CommentHeader/CommentHeader.svelte";
   import ComponentsWrapper from "$lib/components/ComponentsWrapper.svelte";
-  import { setContext } from "svelte";
+  import CommentForm from "$lib/CommentForm/CommentForm.svelte";
 
+  import { setContext } from "svelte";
   import type { TypeComment } from "$types/comment";
   export let comment: TypeComment;
+
+  let isFormVisible: boolean = false;
+  const showEditForm = (): void => {
+    isFormVisible = true;
+  };
 
   setContext("comment", comment);
 </script>
@@ -28,7 +34,7 @@
       <Counter score={comment.score} />
     </div>
     <div class="lg:col-start-3 lg:row-start-1">
-      <CommentActions />
+      <CommentActions on:reply={showEditForm} />
     </div>
   </footer>
 </ComponentsWrapper>
@@ -43,6 +49,12 @@
       </li>
     {/each}
   </ul>
+{/if}
+
+{#if isFormVisible}
+  <div class="mt-2">
+    <CommentForm />
+  </div>
 {/if}
 
 <style windi:preflights:global windi:safelist:global>
