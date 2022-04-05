@@ -12,7 +12,7 @@ export const comments = [
 			},
 			username: 'amyrobson'
 		},
-		replies: []
+		replies: null
 	},
 	{
 		id: 2,

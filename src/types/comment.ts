@@ -6,6 +6,6 @@ export type TypeComment = {
 	createdAt: string;
 	score: number;
 	user: TypeUser;
-	replies?: Array<TypeComment>;
+	replies?: Array<TypeComment> | null;
 	replyingTo?: string;
 };

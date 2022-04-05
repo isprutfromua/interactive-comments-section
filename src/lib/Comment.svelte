@@ -12,6 +12,7 @@
 
   let isFormVisible: boolean = false;
   const showEditForm = (): void => {
+    comment.replies = [];
     isFormVisible = true;
   };
 
@@ -41,19 +42,18 @@
 
 <!-- replies -->
 {#if comment.replies}
-  <ul
-    class="border-lightGray flex flex-col border-l-2 pl-4 gap-y-4 lg:ml-11 lg:pl-11 lg:gap-y-6">
-    {#each comment.replies as comment}
-      <li>
-        <svelte:self {comment} />
-      </li>
-    {/each}
-  </ul>
-{/if}
-
-{#if isFormVisible}
-  <div class="mt-2">
-    <CommentForm />
+  <div
+    class="border-lightGray flex flex-col border-l-2 mt-2 pl-4 lg:ml-11 lg:pl-11 ">
+    <ul class="flex flex-col gap-y-4 lg:gap-y-6">
+      {#each comment.replies as comment}
+        <li>
+          <svelte:self {comment} />
+        </li>
+      {/each}
+    </ul>
+    {#if isFormVisible}
+      <CommentForm />
+    {/if}
   </div>
 {/if}
 
