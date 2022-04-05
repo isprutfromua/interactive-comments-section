@@ -6,10 +6,10 @@
   import ComponentsWrapper from "$lib/components/ComponentsWrapper.svelte";
   import { setContext } from "svelte";
 
-  import type { TypeComment } from "src/types/comment";
+  import type { TypeComment } from "$types/comment";
   export let comment: TypeComment;
 
-  setContext("user", comment.user);
+  setContext("comment", comment);
 </script>
 
 <ComponentsWrapper

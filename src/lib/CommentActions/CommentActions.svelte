@@ -1,19 +1,32 @@
 <script lang="ts">
-  import IconReply from "$lib/icons/IconReply.svelte";
-  import IconEdit from "$lib/icons/IconEdit.svelte";
-  import IconDelete from "$lib/icons/IconDelete.svelte";
+  import IconReply from "$icons/IconReply.svelte";
+  import IconEdit from "$icons/IconEdit.svelte";
+  import IconDelete from "$icons/IconDelete.svelte";
   import CommentAction from "./CommentAction.svelte";
 
   import { getContext } from "svelte";
-  import { currentUser } from "../../stores/userStore";
-  import type { User } from "src/stores/userStore";
+  import { currentUser } from "$stores/userStore";
+  import { commentsStore } from "$stores/comments";
 
-  let user: User = getContext("user");
+  import type { TypeComment } from "$types/comment";
+  import type { TypeUser } from "$types/user";
+
+  let comment: TypeComment = getContext("comment");
+  let user: TypeUser = comment.user;
+  console.log(comment);
+
+  let removeComment = (): void => {
+    $commentsStore = $commentsStore.filter(
+      (storeComment: TypeComment) => storeComment.id !== comment.id
+    );
+  };
 </script>
 
 <div class="flex gap-x-4 items-center">
   {#if user.username === $currentUser.username}
-    <CommentAction class="text-softRed hover:text-paleRed">
+    <CommentAction
+      class="text-softRed hover:text-paleRed"
+      on:click={removeComment}>
       <IconDelete />
 
       <span class="font-medium leading-6">Delete</span>

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { User } from "src/stores/userStore";
-  export let user: User;
+  import type { TypeUser } from "$types/user";
+  export let user: TypeUser;
 </script>
 
 <picture>

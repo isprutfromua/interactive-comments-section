@@ -4,11 +4,13 @@
   import CommentUserPhoto from "$lib/CommentHeader/CommentUserPhoto.svelte";
   import CommentUserLabel from "$lib/CommentHeader/CommentUserLabel.svelte";
 
-  import { currentUser, type User } from "../../stores/userStore";
+  import { currentUser } from "$stores/userStore";
   import { getContext } from "svelte";
+  import type { TypeUser } from "$types/user";
+  import type { TypeComment } from "$types/comment";
 
-  let user: User;
-  user = getContext("user");
+  let comment: TypeComment = getContext("comment");
+  let user: TypeUser = comment.user;
 
   export let createdAt: string;
 </script>

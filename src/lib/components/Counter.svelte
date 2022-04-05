@@ -1,7 +1,7 @@
 <script>
   import CounterButton from "./CounterButton.svelte";
-  import IconMinus from "$lib/icons/IconMinus.svelte";
-  import IconPlus from "$lib/icons/IconPlus.svelte";
+  import IconMinus from "$icons/IconMinus.svelte";
+  import IconPlus from "$icons/IconPlus.svelte";
 
   export let score = 0;
 </script>
