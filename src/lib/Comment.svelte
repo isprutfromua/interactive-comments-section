@@ -4,6 +4,15 @@
   import CommentText from "$lib/CommentText/CommentText.svelte";
   import CommentHeader from "$lib/CommentHeader/CommentHeader.svelte";
   import ComponentsWrapper from "$lib/components/ComponentsWrapper.svelte";
+  import { setContext } from "svelte";
+
+  setContext("user", {
+    image: {
+      png: "./images/avatars/image-amyrobson.png",
+      webp: "./images/avatars/image-amyrobson.webp",
+    },
+    username: "amyrobson",
+  });
 </script>
 
 <ComponentsWrapper

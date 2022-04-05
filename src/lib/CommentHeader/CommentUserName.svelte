@@ -1,1 +1,1 @@
-<span class="text-darkBlue font-medium">amyrobson</span>
+<span class="font-medium text-darkBlue">amyrobson</span>
