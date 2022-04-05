@@ -7,7 +7,7 @@
   <title>Interactive comments section</title>
 </svelte:head>
 
-<main class="container bg-softRed  mx-auto text-grayishBlue text-base">
+<main class="container mx-auto text-grayishBlue text-base">
   <Comments />
 
   <footer class="mt-4 lg:mt-5">
