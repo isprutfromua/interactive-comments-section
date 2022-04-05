@@ -1,10 +1,11 @@
-import type { User } from 'src/stores/userStore';
+import type { TypeUser } from './user';
 
 export type TypeComment = {
-	id: number;
+	id: number | string;
 	content: string;
 	createdAt: string;
 	score: number;
-	user: User;
+	user: TypeUser;
 	replies?: Array<TypeComment>;
+	replyingTo?: string;
 };
