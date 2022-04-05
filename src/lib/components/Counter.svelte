@@ -2,6 +2,8 @@
   import CounterButton from "./CounterButton.svelte";
   import IconMinus from "$lib/icons/IconMinus.svelte";
   import IconPlus from "$lib/icons/IconPlus.svelte";
+
+  export let score = 0;
 </script>
 
 <div
@@ -11,7 +13,7 @@
     <IconPlus />
   </CounterButton>
 
-  <span class="font-medium text-moderateBlue select-none">12</span>
+  <span class="font-medium text-moderateBlue select-none">{score}</span>
 
   <CounterButton>
     <span class="sr-only"> Decrease comment </span>

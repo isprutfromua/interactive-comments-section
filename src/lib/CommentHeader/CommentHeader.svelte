@@ -8,20 +8,21 @@
   import { getContext } from "svelte";
 
   let user: User;
-
   user = getContext("user");
+
+  export let createdAt: string;
 </script>
 
 <header class="flex gap-x-4 items-center">
   <CommentUserPhoto {user} />
   <p class="flex gap-x-2 items-center">
-    <CommentUserName />
+    <CommentUserName username={user.username} />
 
     {#if user.username === $currentUser.username}
       <CommentUserLabel />
     {/if}
   </p>
-  <CommentDate />
+  <CommentDate {createdAt} />
 </header>
 
 <style>
