@@ -18,7 +18,8 @@ export default defineConfig({
 		'lg:gap-y-4',
 		'lg:grid-cols-[max-content,1fr,max-content]',
 		'text-moderateBlue',
-		'text-softRed'
+		'text-softRed',
+		'overflow-hidden'
 	],
 	theme: {
 		extend: {
@@ -45,7 +46,8 @@ export default defineConfig({
 			lightGray: 'hsla(223, 18.9%, 92.7%, 1)',
 			softRed: 'hsla(358, 79.3%, 65.9%, 1)',
 			paleRed: 'hsla(357, 100%, 86.1%, 1)',
-			white: 'hsla(0, 0%, 100%, 1)'
+			white: 'hsla(0, 0%, 100%, 1)',
+			overlay: 'hsla(0, 0%, 0%, .5)'
 		},
 		fontFamily: {
 			sans: [
