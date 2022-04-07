@@ -1,10 +1,12 @@
 <script lang="ts">
+  // components
   import Modal from "$lib/components/Modal.svelte";
   import CommentForm from "$lib/CommentForm/CommentForm.svelte";
   import Comments from "$lib/Comments.svelte";
+  // stores
   import { modalIsOpened } from "$stores/modal";
   import { commentsDeletePromise, commentsStore } from "$stores/comments";
-
+  // logic
   let approveCommentDelete, cancelCommentDelete;
 
   // TODO: move to store

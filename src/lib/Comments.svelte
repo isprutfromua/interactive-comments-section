@@ -1,5 +1,7 @@
 <script lang="ts">
+  // stores
   import { commentsStore } from "$stores/comments";
+  // components
   import Comment from "./Comment.svelte";
 </script>
 

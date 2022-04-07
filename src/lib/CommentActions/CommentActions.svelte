@@ -1,16 +1,18 @@
 <script lang="ts">
+  // icons
   import IconReply from "$icons/IconReply.svelte";
   import IconEdit from "$icons/IconEdit.svelte";
   import IconDelete from "$icons/IconDelete.svelte";
   import CommentAction from "./CommentAction.svelte";
-
-  import { createEventDispatcher, getContext } from "svelte";
+  // svelte
+  import { createEventDispatcher } from "svelte";
+  // stores
   import { currentUser } from "$stores/userStore";
   import type { TypeUser } from "$types/user";
-
+  // props
   export let user: TypeUser;
   export let id: number;
-
+  // logic
   let dispatch = createEventDispatcher();
 </script>
 

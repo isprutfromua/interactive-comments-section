@@ -1,5 +1,7 @@
 <script lang="ts">
+  // types
   import type { TypeUser } from "$types/user";
+  // props
   export let user: TypeUser;
 </script>
 

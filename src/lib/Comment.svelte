@@ -1,21 +1,26 @@
 <script lang="ts">
+  // components
   import CommentActions from "$lib/CommentActions/CommentActions.svelte";
   import Counter from "$lib/components/Counter.svelte";
   import CommentText from "$lib/CommentText/CommentText.svelte";
   import CommentHeader from "$lib/CommentHeader/CommentHeader.svelte";
   import ComponentsWrapper from "$lib/components/ComponentsWrapper.svelte";
   import CommentForm from "$lib/CommentForm/CommentForm.svelte";
-
-  import type { TypeComment } from "$types/comment";
+  // svelte
   import { writable, type Writable } from "svelte/store";
+  // types
+  import type { TypeComment } from "$types/comment";
+  // stores
   import { commentsDeletePromise, commentsStore } from "$stores/comments";
   import { modalIsOpened } from "$stores/modal";
-
+  // props
   export let comment: TypeComment;
-  $: replies = comment.replies?.length ? comment.replies : [];
-
+  //logic
   let isFormVisible: boolean = false;
   let editMode: boolean = false;
+  let dynamicComment: Writable<TypeComment> = writable(comment);
+
+  $: replies = comment.replies?.length ? comment.replies : [];
 
   const showEditForm = (): void => {
     comment.replies = comment.replies || [];
@@ -67,8 +72,6 @@
 
     $commentsStore = [...$commentsStore];
   };
-
-  let dynamicComment: Writable<TypeComment> = writable(comment);
 </script>
 
 <ComponentsWrapper

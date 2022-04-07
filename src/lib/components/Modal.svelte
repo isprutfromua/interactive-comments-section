@@ -1,7 +1,10 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-  let dispatch = createEventDispatcher();
+  // components
   import Button from "$lib/components/Button.svelte";
+  // svelte
+  import { createEventDispatcher } from "svelte";
+  //logic
+  let dispatch = createEventDispatcher();
 </script>
 
 <div on:click class="bg-black bg-overlay grid inset-0 fixed place-items-center">

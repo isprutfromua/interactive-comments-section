@@ -1,13 +1,17 @@
 <script lang="ts">
-  import CounterButton from "./CounterButton.svelte";
+  // icons
   import IconMinus from "$icons/IconMinus.svelte";
   import IconPlus from "$icons/IconPlus.svelte";
-
+  // components
+  import CounterButton from "./CounterButton.svelte";
+  // svelte
   import { createEventDispatcher } from "svelte";
-
-  const dispatch = createEventDispatcher();
+  // props
   export let score = 0;
+
+  // logic
   let decreaseButton, increaseButton;
+  const dispatch = createEventDispatcher();
 
   let changeScore = (type: "increase" | "decrease") => {
     increaseButton.disabled = !increaseButton.disabled;
