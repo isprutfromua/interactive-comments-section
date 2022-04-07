@@ -34,11 +34,11 @@
         ...comment.replies,
         { ...newComment, replyingTo: comment.user.username },
       ];
+
+      $commentsStore = [...$commentsStore];
     } else {
       $commentsStore = [...$commentsStore, newComment];
     }
-
-    $commentsStore = [...$commentsStore];
 
     userInput = "";
     dispatch("comment-add");
