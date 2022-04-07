@@ -27,11 +27,13 @@
       createdAt: formattedTime,
       score: 0,
       user: $currentUser,
-      replyingTo: comment.user.username,
     };
 
     if ($$props.comment) {
-      comment.replies = [...comment.replies, newComment];
+      comment.replies = [
+        ...comment.replies,
+        { ...newComment, replyingTo: comment.user.username },
+      ];
     } else {
       $commentsStore = [...$commentsStore, newComment];
     }
