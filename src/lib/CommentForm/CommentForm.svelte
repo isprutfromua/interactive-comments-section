@@ -10,9 +10,11 @@
   import type { TypeComment } from "$types/comment";
   import { createEventDispatcher } from "svelte";
 
-  let userInput = "";
+  export let comment: TypeComment = undefined;
+  export let editMode: boolean = false;
+
+  let userInput = editMode ? comment.content : "";
   let dispatch = createEventDispatcher();
-  export let comment: TypeComment;
 
   function addReply() {
     let generatedId: number = Date.now();
@@ -25,6 +27,7 @@
       createdAt: formattedTime,
       score: 0,
       user: $currentUser,
+      replyingTo: comment.user.username,
     };
 
     if ($$props.comment) {
@@ -38,21 +41,40 @@
     userInput = "";
     dispatch("comment-add");
   }
+
+  function updateReply() {
+    dispatch("comment-update", userInput);
+  }
 </script>
 
 <ComponentsWrapper
-  class="gap-y-2 gap-x-2 grid-cols-[max-content,1fr,max-content]">
-  <div class="h-10 w-10 <lg:row-start-2">
-    <UserAvatar user={$currentUser} />
-  </div>
+  class="gap-y-2 gap-x-2 grid-cols-[max-content,1fr,max-content] {editMode
+    ? '!p-0 grid-cols-1'
+    : ''} ">
+  {#if !editMode}
+    <div class="h-10 w-10 <lg:row-start-2">
+      <UserAvatar user={$currentUser} />
+    </div>
+  {/if}
   <div class="<lg:col-span-full">
     <CommentInput bind:userInput />
   </div>
-  <div class="<lg:col-start-3">
-    <Button
-      on:click={addReply}
-      class="bg-moderateBlue hover:bg-lightGrayishBlue focus:bg-lightGrayishBlue ">
-      send
-    </Button>
+  <div class="flex justify-end items-start <lg:col-start-3">
+    {#if editMode}
+      <Button
+        on:click={updateReply}
+        class="bg-moderateBlue hover:bg-lightGrayishBlue focus:bg-lightGrayishBlue">
+        update
+      </Button>
+    {:else}
+      <Button
+        on:click={addReply}
+        class="bg-moderateBlue hover:bg-lightGrayishBlue focus:bg-lightGrayishBlue ">
+        send
+      </Button>
+    {/if}
   </div>
 </ComponentsWrapper>
+
+<style windi:preflights:global windi:safelist:global>
+</style>

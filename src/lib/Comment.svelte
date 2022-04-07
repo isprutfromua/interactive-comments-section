@@ -10,11 +10,13 @@
   import { writable, type Writable } from "svelte/store";
   import { commentsDeletePromise, commentsStore } from "$stores/comments";
   import { modalIsOpened } from "$stores/modal";
+  import CommentDate from "./CommentHeader/CommentDate.svelte";
 
   export let comment: TypeComment;
   $: replies = comment.replies?.length ? comment.replies : [];
 
   let isFormVisible: boolean = false;
+  let editMode: boolean = false;
 
   const showEditForm = (): void => {
     comment.replies = comment.replies || [];
@@ -51,6 +53,11 @@
     });
   };
 
+  let updateComment = (e) => {
+    comment.content = e.detail;
+    editMode = false;
+  };
+
   let dynamicComment: Writable<TypeComment> = writable(comment);
 </script>
 
@@ -62,9 +69,13 @@
   </div>
   <!-- text wrapper -->
   <div class="mt-4 mb-10 lg:mt-0 lg:mb-0 lg:col-start-2 lg:col-span-2">
-    <CommentText
+    <svelte:component
+      this={editMode ? CommentForm : CommentText}
       replyingTo={$dynamicComment.replyingTo}
-      text={$dynamicComment.content} />
+      text={$dynamicComment.content}
+      {editMode}
+      {comment}
+      on:comment-update={updateComment} />
   </div>
   <!-- actions wrapper -->
   <footer class="flex justify-between items-center lg:contents">
@@ -76,6 +87,9 @@
         user={$dynamicComment.user}
         id={$dynamicComment.id}
         on:reply={showEditForm}
+        on:edit={() => {
+          editMode = !editMode;
+        }}
         on:delete={() => {
           deleteComment($dynamicComment.id);
         }} />

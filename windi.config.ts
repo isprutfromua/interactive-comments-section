@@ -19,7 +19,9 @@ export default defineConfig({
 		'lg:grid-cols-[max-content,1fr,max-content]',
 		'text-moderateBlue',
 		'text-softRed',
-		'overflow-hidden'
+		'overflow-hidden',
+		'!p-0',
+		'grid-cols-1'
 	],
 	theme: {
 		extend: {
