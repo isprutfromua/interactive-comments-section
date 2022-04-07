@@ -12,13 +12,17 @@
   import { modalIsOpened } from "$stores/modal";
 
   export let comment: TypeComment;
-  $: replies = comment.replies;
+  $: replies = comment.replies?.length ? comment.replies : [];
 
   let isFormVisible: boolean = false;
 
   const showEditForm = (): void => {
-    comment.replies = [];
+    comment.replies = comment.replies || [];
     isFormVisible = true;
+  };
+
+  const hideEditForm = (): void => {
+    isFormVisible = false;
   };
 
   let changeScore = () => {
@@ -91,7 +95,7 @@
       {/each}
     </ul>
     {#if isFormVisible}
-      <CommentForm />
+      <CommentForm {comment} on:comment-add={hideEditForm} />
     {/if}
   </div>
 {/if}

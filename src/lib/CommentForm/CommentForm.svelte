@@ -8,8 +8,11 @@
   import { commentsStore } from "$stores/comments";
 
   import type { TypeComment } from "$types/comment";
+  import { createEventDispatcher } from "svelte";
 
   let userInput = "";
+  let dispatch = createEventDispatcher();
+  export let comment: TypeComment;
 
   function addReply() {
     let generatedId: number = Date.now();
@@ -24,9 +27,16 @@
       user: $currentUser,
     };
 
-    $commentsStore = [...$commentsStore, newComment];
+    if ($$props.comment) {
+      comment.replies = [...comment.replies, newComment];
+    } else {
+      $commentsStore = [...$commentsStore, newComment];
+    }
+
+    $commentsStore = [...$commentsStore];
 
     userInput = "";
+    dispatch("comment-add");
   }
 </script>
 
