@@ -1,4 +1,9 @@
+<script>
+  export let button = undefined;
+</script>
+
 <button
+  bind:this={button}
   class="outline-moderateBlue text-lightGrayishBlue
                 transform
                 transition

@@ -27,8 +27,13 @@
     isFormVisible = false;
   };
 
-  let changeScore = () => {
+  let increaseScore = () => {
     $dynamicComment.score = $dynamicComment.score + 1;
+  };
+
+  let decreaseScore = () => {
+    $dynamicComment.score =
+      $dynamicComment.score > 0 ? $dynamicComment.score - 1 : 0;
   };
 
   let deleteComment = (id: number) => {
@@ -80,7 +85,10 @@
   <!-- actions wrapper -->
   <footer class="flex justify-between items-center lg:contents">
     <div class="lg:col-start-1 lg:row-start-1 lg:row-span-2">
-      <Counter on:click|once={changeScore} score={$dynamicComment.score} />
+      <Counter
+        on:increase={increaseScore}
+        on:decrease={decreaseScore}
+        score={$dynamicComment.score} />
     </div>
     <div class="lg:col-start-3 lg:row-start-1">
       <CommentActions
