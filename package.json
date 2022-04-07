@@ -33,6 +33,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"uuid": "^8.3.2"
+		"@sveltejs/adapter-static": "^1.0.0-next.29",
+		"uuid": "^8.3.2",
+		"vercel": "^24.0.1"
 	}
 }

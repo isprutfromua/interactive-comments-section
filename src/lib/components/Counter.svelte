@@ -10,12 +10,12 @@
   export let score = 0;
 
   // logic
-  let decreaseButton, increaseButton;
+  let downvoteButton, upvoteButton;
   const dispatch = createEventDispatcher();
 
-  let changeScore = (type: "increase" | "decrease") => {
-    increaseButton.disabled = !increaseButton.disabled;
-    decreaseButton.disabled = !increaseButton.disabled;
+  let changeScore = (type: "upvote" | "downvote") => {
+    upvoteButton.disabled = !upvoteButton.disabled;
+    downvoteButton.disabled = !upvoteButton.disabled;
 
     dispatch(type);
   };
@@ -24,8 +24,8 @@
 <div
   class="bg-veryLightGray rounded-counter flex h-10 w-25 gap-x-4 items-center justify-center lg:flex-col lg:h-25 lg:py-4 lg:w-10 lg:gap-y-3.5">
   <CounterButton
-    bind:button={increaseButton}
-    on:click={() => changeScore("increase")}>
+    bind:button={upvoteButton}
+    on:click={() => changeScore("upvote")}>
     <span class="sr-only"> Upwote comment </span>
     <IconPlus />
   </CounterButton>
@@ -33,9 +33,9 @@
   <span class="font-medium text-moderateBlue select-none">{score}</span>
 
   <CounterButton
-    bind:button={decreaseButton}
-    on:click={() => changeScore("decrease")}>
-    <span class="sr-only"> Decrease comment </span>
+    bind:button={downvoteButton}
+    on:click={() => changeScore("downvote")}>
+    <span class="sr-only"> downvote comment </span>
     <IconMinus />
   </CounterButton>
 </div>

@@ -31,13 +31,13 @@
     isFormVisible = false;
   };
 
-  const increaseScore = () => {
+  const upvoteScore = () => {
     $dynamicComment.score = $dynamicComment.score + 1;
 
     $commentsStore = [...$commentsStore];
   };
 
-  const decreaseScore = () => {
+  const downvoteScore = () => {
     $dynamicComment.score =
       $dynamicComment.score > 0 ? $dynamicComment.score - 1 : 0;
 
@@ -94,8 +94,8 @@
   <footer class="flex justify-between items-center lg:contents">
     <div class="lg:col-start-1 lg:row-start-1 lg:row-span-2">
       <Counter
-        on:increase={increaseScore}
-        on:decrease={decreaseScore}
+        on:upvote={upvoteScore}
+        on:downvote={downvoteScore}
         score={$dynamicComment.score} />
     </div>
     <div class="lg:col-start-3 lg:row-start-1">
