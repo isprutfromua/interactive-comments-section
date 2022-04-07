@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+  let dispatch = createEventDispatcher();
   import Button from "$lib/components/Button.svelte";
 </script>
 
@@ -13,10 +15,16 @@
     </p>
     <div class="flex gap-x-2 items-center">
       <Button
+        on:click={() => {
+          dispatch("cancel");
+        }}
         class="bg-grayishBlue hover:bg-lightGrayishBlue focus:bg-lightGrayishBlue"
         >No, cancel</Button>
-      <Button class="bg-softRed hover:bg-paleRed focus:bg-paleRed"
-        >Yes, delete</Button>
+      <Button
+        class="bg-softRed hover:bg-paleRed focus:bg-paleRed"
+        on:click={() => {
+          dispatch("approve");
+        }}>Yes, delete</Button>
     </div>
   </div>
 </div>

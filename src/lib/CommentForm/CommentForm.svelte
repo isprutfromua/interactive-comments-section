@@ -8,12 +8,11 @@
   import { commentsStore } from "$stores/comments";
 
   import type { TypeComment } from "$types/comment";
-  import { v4 as uuidv4 } from "uuid";
 
   let userInput = "";
 
   function addReply() {
-    let generatedId: string = uuidv4();
+    let generatedId: number = Date.now();
     let currentTime: Date = new Date();
     let formattedTime: string = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
 

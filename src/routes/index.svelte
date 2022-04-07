@@ -2,15 +2,26 @@
   import Modal from "$lib/components/Modal.svelte";
   import CommentForm from "$lib/CommentForm/CommentForm.svelte";
   import Comments from "$lib/Comments.svelte";
+  import { modalIsOpened } from "$stores/modal";
+  import { commentsDeletePromise } from "$stores/comments";
 
-  let isModalVisible = false;
+  let approveCommentDelete, cancelCommentDelete;
+
+  // TODO: move to store
   const toggleModal = (): void => {
-    isModalVisible = !isModalVisible;
+    $modalIsOpened = !$modalIsOpened;
 
-    isModalVisible
+    !$modalIsOpened
       ? document.documentElement.classList.add("overflow-hidden")
       : document.documentElement.classList.remove("overflow-hidden");
   };
+
+  $: if ($modalIsOpened) {
+    $commentsDeletePromise = new Promise<void>((resolve, reject) => {
+      approveCommentDelete = resolve;
+      cancelCommentDelete = reject;
+    });
+  }
 </script>
 
 <svelte:head>
@@ -30,8 +41,11 @@
   </footer>
 </main>
 
-{#if isModalVisible}
-  <Modal on:click={toggleModal} />
+{#if $modalIsOpened}
+  <Modal
+    on:approve={approveCommentDelete}
+    on:cancel={cancelCommentDelete}
+    on:click={toggleModal} />
 {/if}
 
 <style windi:preflights:global windi:safelist:global>

@@ -6,13 +6,10 @@
 
   import { createEventDispatcher, getContext } from "svelte";
   import { currentUser } from "$stores/userStore";
-  import { commentsStore } from "$stores/comments";
-
-  import type { TypeComment } from "$types/comment";
   import type { TypeUser } from "$types/user";
 
-  let comment: TypeComment = getContext("comment");
-  let user: TypeUser = comment.user;
+  export let user: TypeUser;
+  export let id: number;
 
   let dispatch = createEventDispatcher();
 </script>
@@ -21,7 +18,7 @@
   {#if user.username === $currentUser.username}
     <CommentAction
       on:click={() => {
-        dispatch("delete");
+        dispatch("delete", id);
       }}
       class="text-softRed hover:text-paleRed">
       <IconDelete />
@@ -32,7 +29,7 @@
     <CommentAction
       class="text-moderateBlue hover:text-lightGrayishBlue"
       on:click={() => {
-        dispatch("edit");
+        dispatch("edit", id);
       }}>
       <IconEdit />
 
@@ -42,7 +39,7 @@
     <CommentAction
       class="text-moderateBlue hover:text-lightGrayishBlue"
       on:click={() => {
-        dispatch("reply");
+        dispatch("reply", id);
       }}>
       <IconReply />
 

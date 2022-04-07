@@ -6,13 +6,12 @@
   import CommentUsernameTag from "./CommentUsernameTag.svelte";
 
   export let text: string;
-
-  let comment: TypeComment = getContext("comment");
+  export let replyingTo: string;
 </script>
 
 <main>
-  {#if comment.replyingTo}
-    <CommentUsernameTag replyingTo={comment.replyingTo} />
+  {#if replyingTo}
+    <CommentUsernameTag {replyingTo} />
   {/if}
   {text}
 </main>
