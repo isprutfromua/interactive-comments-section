@@ -10,7 +10,6 @@
   import { writable, type Writable } from "svelte/store";
   import { commentsDeletePromise, commentsStore } from "$stores/comments";
   import { modalIsOpened } from "$stores/modal";
-  import CommentDate from "./CommentHeader/CommentDate.svelte";
 
   export let comment: TypeComment;
   $: replies = comment.replies?.length ? comment.replies : [];
@@ -27,16 +26,20 @@
     isFormVisible = false;
   };
 
-  let increaseScore = () => {
+  const increaseScore = () => {
     $dynamicComment.score = $dynamicComment.score + 1;
+
+    $commentsStore = [...$commentsStore];
   };
 
-  let decreaseScore = () => {
+  const decreaseScore = () => {
     $dynamicComment.score =
       $dynamicComment.score > 0 ? $dynamicComment.score - 1 : 0;
+
+    $commentsStore = [...$commentsStore];
   };
 
-  let deleteComment = (id: number) => {
+  const deleteComment = (id: number) => {
     modalIsOpened.set(true);
 
     Promise.resolve().then(function () {
@@ -58,9 +61,11 @@
     });
   };
 
-  let updateComment = (e) => {
+  const updateComment = (e) => {
     comment.content = e.detail;
     editMode = false;
+
+    $commentsStore = [...$commentsStore];
   };
 
   let dynamicComment: Writable<TypeComment> = writable(comment);

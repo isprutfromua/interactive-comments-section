@@ -4,16 +4,19 @@ import { comments } from '../data';
 
 import type { TypeComment } from '../types/comment';
 
-const storedComments = browser && localStorage?.getItem('comments');
-const parsedComments: TypeComment[] =
-	storedComments !== null ? JSON.parse(storedComments) : null;
+export let commentsStore = writable([]);
 
-export const commentsStore = writable<TypeComment[]>(
-	parsedComments || comments
-);
+if (browser) {
+	const storedComments = localStorage?.getItem('comments');
+	const parsedComments: TypeComment[] =
+		storedComments !== null ? JSON.parse(storedComments) : null;
 
-commentsStore.subscribe((value) => {
-	browser && localStorage.setItem('comments', JSON.stringify(value));
-});
+	const data = parsedComments?.length ? parsedComments : comments;
+	commentsStore.set(data);
+
+	commentsStore.subscribe((value) => {
+		localStorage.setItem('comments', JSON.stringify(value));
+	});
+}
 
 export const commentsDeletePromise = writable<Promise<void>>();

@@ -3,7 +3,7 @@
   import CommentForm from "$lib/CommentForm/CommentForm.svelte";
   import Comments from "$lib/Comments.svelte";
   import { modalIsOpened } from "$stores/modal";
-  import { commentsDeletePromise } from "$stores/comments";
+  import { commentsDeletePromise, commentsStore } from "$stores/comments";
 
   let approveCommentDelete, cancelCommentDelete;
 
@@ -34,11 +34,16 @@
 </svelte:head>
 
 <main class="container mx-auto text-grayishBlue text-base">
-  <Comments />
+  {#if $commentsStore.length}
+    <!-- content here -->
+    <Comments />
 
-  <footer class="mt-4 lg:mt-5">
-    <CommentForm />
-  </footer>
+    <footer class="mt-4 lg:mt-5">
+      <CommentForm />
+    </footer>
+  {:else}
+    <p class="text-heading text-darkBlue">Fetching comments</p>
+  {/if}
 </main>
 
 {#if $modalIsOpened}
